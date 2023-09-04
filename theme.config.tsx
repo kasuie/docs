@@ -2,7 +2,7 @@
  * @Author: kasuie
  * @Date: 2023-09-04 15:01:26
  * @LastEditors: kasuie
- * @LastEditTime: 2023-09-04 18:06:08
+ * @LastEditTime: 2023-09-04 22:27:42
  * @Description:
  */
 import React from "react";
@@ -17,7 +17,7 @@ const config: DocsThemeConfig = {
     link: "https://discord.com",
   },
   darkMode: true,
-  docsRepositoryBase: "https://github.com/shuding/nextra-docs-template",
+  docsRepositoryBase: "https://github.com/kasuie/docs",
   footer: {
     text: "© 2020 - 2023 By KASUIE.",
   },
