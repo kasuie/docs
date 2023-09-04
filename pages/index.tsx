@@ -2,7 +2,7 @@
  * @Author: kasuie
  * @Date: 2023-09-04 15:01:26
  * @LastEditors: kasuie
- * @LastEditTime: 2023-09-04 22:23:32
+ * @LastEditTime: 2023-09-04 22:31:05
  * @Description:
  */
 import Button from "../components/button";
@@ -13,7 +13,7 @@ export default function Home() {
     <div className={styles["docs-home"]}>
       <div className={styles["docs-home-main"]}>
         <div className={styles["docs-home-main"]}>Kasuie の API Docs</div>
-        <Button text={"开始使用"} path="/docs"></Button>
+        <Button text={"开始使用"} path="/mio"></Button>
       </div>
     </div>
   );
