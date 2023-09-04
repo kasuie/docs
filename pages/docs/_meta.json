@@ -4,16 +4,5 @@
   "response": "响应",
   "example": "示例",
   "manage": "管理",
-  "statistics": "统计",
-  "advanced": "Advanced (A Folder)",
-  "about": {
-    "title": "About",
-    "type": "page"
-  },
-  "contact": {
-    "title": "Contact ↗",
-    "type": "page",
-    "href": "https://twitter.com/shuding_",
-    "newWindow": true
-  }
+  "statistics": "统计"
 }
