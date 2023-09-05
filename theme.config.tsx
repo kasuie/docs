@@ -2,7 +2,7 @@
  * @Author: kasuie
  * @Date: 2023-09-04 15:01:26
  * @LastEditors: kasuie
- * @LastEditTime: 2023-09-05 14:59:16
+ * @LastEditTime: 2023-09-05 15:12:26
  * @Description:
  */
 import React from "react";
@@ -32,8 +32,15 @@ const config: DocsThemeConfig = {
   darkMode: true,
   direction: "ltr",
   docsRepositoryBase: "https://github.com/kasuie/docs/blob/main",
+  editLink: {
+    text: '编辑此页面 →'
+  },
+  feedback: {
+    content: '提交疑问或bug →',
+    labels: 'feedback'
+  },
   toc: {
-    backToTop: true
+    backToTop: true,
   },
   footer: {
     text: <Footer text={'© 2020 - 2023 By KASUIE'} />,
