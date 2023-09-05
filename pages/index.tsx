@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <div className={styles["docs-home"]}>
       <div className={styles["docs-home-main"]}>
-        <div className={styles["docs-home-main"]}>Kasuie の API Docs</div>
+        <div className={styles["docs-home-main-title"]}>Kasuie の API Docs</div>
         <Button text={"开始使用"} path="/mio"></Button>
       </div>
     </div>

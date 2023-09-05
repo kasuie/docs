@@ -1,9 +1,49 @@
 # 示例
 
-- https://api.kasuie.cc/mio
+## 请求示例
 
-- https://api.kasuie.cc/mio?num=5
+> 普通调用
+> - https://api.kasuie.cc/mio
 
-- https://api.kasuie.cc/mio?tag=tag1&tag=tag2
+> 返回`5`张图片
+> - https://api.kasuie.cc/mio?num=5
 
-- https://api.kasuie.cc/mio?size=original&size=small
+> 返回`tag`为tag1和`tag`为tag2的
+> - https://api.kasuie.cc/mio?tag=tag1&tag=tag2
+
+> 返回尺寸包含`original`和`small`
+> - https://api.kasuie.cc/mio?size=original&size=small
+
+## 响应示例
+```js
+{
+    "success": true,
+    "message": "查询成功",
+    "data": [
+        {
+            "pid": 81535783,
+            "p": 0,
+            "uid": 1055457,
+            "title": "JSちゃん。",
+            "width": 992,
+            "height": 1487,
+            "tag": [
+                "オリジナル",
+                "original",
+                "キャミソールワンピース",
+                "camisole dress",
+                "女の子",
+                "girl"
+            ],
+            "ext": "jpg",
+            "aiType": 0,
+            "author": "ふぇありぃあい＠東ス66ab",
+            "createDate": "2020-05-13T10:59:49.000+00:00",
+            "r18": false,
+            "urls": {
+                "original": "https://i.pixiv.re/img-original/img/2020/05/13/19/59/49/81535783_p0.jpg"
+            }
+        }
+    ]
+}
+```

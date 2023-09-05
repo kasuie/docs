@@ -2,24 +2,41 @@
  * @Author: kasuie
  * @Date: 2023-09-04 15:01:26
  * @LastEditors: kasuie
- * @LastEditTime: 2023-09-04 23:22:01
+ * @LastEditTime: 2023-09-05 14:59:16
  * @Description:
  */
 import React from "react";
 import { DocsThemeConfig } from "nextra-theme-docs";
+import Footer from "./components/footer";
+import { useRouter } from "next/router";
 
 const config: DocsThemeConfig = {
-  logo: <span>KasuieのDocs</span>,
+  logo: <span>Docs</span>,  
+  useNextSeoProps() {
+    const { asPath } = useRouter()
+    if (asPath !== '/') {
+      return {
+        titleTemplate: '%s – Docs'
+      }
+    }
+  },
+  search: {
+    placeholder: "输入关键词搜索"
+  },
   project: {
     link: "https://github.com/kasuie",
   },
-  chat: {
-    link: "https://discord.com",
-  },
+  // chat: {
+  //   link: "https://discord.com",
+  // },
   darkMode: true,
+  direction: "ltr",
   docsRepositoryBase: "https://github.com/kasuie/docs/blob/main",
+  toc: {
+    backToTop: true
+  },
   footer: {
-    text: "© 2020 - 2023 By KASUIE.",
+    text: <Footer text={'© 2020 - 2023 By KASUIE'} />,
   },
 };
 
