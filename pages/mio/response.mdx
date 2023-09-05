@@ -12,16 +12,16 @@
 
 | 字段名     | 数据类型  | 说明                                             |
 |:------------|:-----------|:--------------------------------------------------|
-| pid        | int       | 作品 pid                                        |
-| p          | int       | 作品所在页                                      |
-| uid        | int       | 作者 uid                                        |
-| title      | string    | 作品标题                                        |
-| author     | string    | 作者名（入库时，并过滤掉 @ 及其后内容）         |
-| r18        | boolean   | 是否 R18（在库中的分类，不等同于作品本身的 R18 标识） |
-| width      | int       | 原图宽度 px                                    |
-| height     | int       | 原图高度 px                                    |
-| tag        | string[]  | 作品标签，包含标签的中文翻译（有的话）           |
-| ext        | string    | 图片扩展名                                      |
-| aiType     | number    | 是否是 AI 作品，0 未知（旧画作或字段未更新），1 不是，2 是 |
-| createDate | int       | 作品上传日期                                    |
-| urls       | object    | 包含了所有指定size的图片地址                     |
+| `pid`        | `int`       | 作品 pid                                        |
+| `p`          | `int`       | 作品所在页                                      |
+| `uid`        | `int`       | 作者 uid                                        |
+| `title`      | `string`    | 作品标题                                        |
+| `author`     | `string`    | 作者名（入库时，并过滤掉 @ 及其后内容）         |
+| `r18`        | `boolean`   | 是否 R18（在库中的分类，不等同于作品本身的 R18 标识） |
+| `width`      | `int`       | 原图宽度 px                                    |
+| `height`     | `int`       | 原图高度 px                                    |
+| `tag`        | `string[] ` | 作品的标签          |
+| `ext`        | `string`    | 图片扩展名                                      |
+| `aiType`     | `number`    | 是否是 AI 作品，0 未知（旧画作或字段未更新），1 不是，2 是 |
+| `createDate` | `int`       | 作品上传日期                                    |
+| `urls`       | `object`    | 包含了所有指定size的图片地址                     |
