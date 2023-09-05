@@ -2,7 +2,7 @@
  * @Author: kasuie
  * @Date: 2023-09-04 15:01:26
  * @LastEditors: kasuie
- * @LastEditTime: 2023-09-05 15:12:26
+ * @LastEditTime: 2023-09-05 15:15:55
  * @Description:
  */
 import React from "react";
@@ -26,9 +26,6 @@ const config: DocsThemeConfig = {
   project: {
     link: "https://github.com/kasuie",
   },
-  // chat: {
-  //   link: "https://discord.com",
-  // },
   darkMode: true,
   direction: "ltr",
   docsRepositoryBase: "https://github.com/kasuie/docs/blob/main",
