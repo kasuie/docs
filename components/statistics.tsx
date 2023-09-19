@@ -2,7 +2,7 @@
  * @Author: kasuie
  * @Date: 2023-09-19 09:30:36
  * @LastEditors: kasuie
- * @LastEditTime: 2023-09-19 14:28:39
+ * @LastEditTime: 2023-09-19 21:28:31
  * @Description:
  */
 "use client";
@@ -14,9 +14,6 @@ import { Request } from "../lib";
 export default function Statistics({ text }) {
   const eChartsRef: any = createRef();
   const [myChart, setMyChart] = useState();
-  const [all, setAll] = useState();
-  const [r12, setR12] = useState();
-  const [r18, setR18] = useState();
   let option = {
     tooltip: {
       trigger: "item",
@@ -50,22 +47,29 @@ export default function Statistics({ text }) {
         labelLine: {
           show: false,
         },
-        data: [
-          { value: all, name: "全年龄" },
-          { value: r12, name: "R12" },
-          { value: r18, name: "R18" },
-        ],
+        data: [],
       },
     ],
   };
 
   useEffect(() => {
     Request.get("/api/img/statistics").then((res: any) => {
-      if(res.success) {
-        const { data: { all, author, counts, illust, r12, r18 } } = res || {};
-        setAll(all || 0);
-        setR12(r12 || 0);
-        setR18(r18 || 0);
+      if (res.success) {
+        const {
+          data: { all, author, counts, illust, r12, r18 },
+        } = res || {};
+        myChart?.setOption?.({
+          series: [
+            {
+              data: [
+                { value: all, name: "全年龄" },
+                { value: r12, name: "R12" },
+                { value: r18, name: "R18" },
+              ],
+            },
+          ],
+        });
+        console.log("options>>>", option);
       }
     });
   }, []);
