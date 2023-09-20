@@ -2,7 +2,7 @@
  * @Author: kasuie
  * @Date: 2023-09-19 09:30:36
  * @LastEditors: kasuie
- * @LastEditTime: 2023-09-19 21:28:31
+ * @LastEditTime: 2023-09-20 11:40:00
  * @Description:
  */
 "use client";
@@ -12,9 +12,16 @@ import styles from "./statistics.module.css";
 import { Request } from "../lib";
 
 export default function Statistics({ text }) {
-  const eChartsRef: any = createRef();
-  const [myChart, setMyChart] = useState();
-  let option = {
+  const PieRef: any = createRef();
+  const LineRef: any = createRef();
+  const [myPie, setMyPie] = useState();
+  const [myLine, setMyLine] = useState();
+  let datesObj = {};
+
+  const pieOption = {
+    title: {
+      text: "限制等级",
+    },
     tooltip: {
       trigger: "item",
     },
@@ -22,9 +29,10 @@ export default function Statistics({ text }) {
       top: "5%",
       left: "center",
     },
+    backgroundColor: "transparent",
     series: [
       {
-        name: "Access From",
+        name: "限制等级:",
         type: "pie",
         radius: ["40%", "70%"],
         avoidLabelOverlap: false,
@@ -50,15 +58,62 @@ export default function Statistics({ text }) {
         data: [],
       },
     ],
+    media: [
+      {
+        query: {
+          maxHeight: 300,
+          minWidth: 300,
+          minAspectRatio: 2,
+        },
+      },
+    ],
   };
 
-  useEffect(() => {
+  const lineOption = {
+    xAxis: {
+      type: "category",
+      data: [],
+    },
+    yAxis: {
+      type: "value",
+    },
+    series: [
+      {
+        data: [],
+        type: "line",
+        smooth: true,
+      },
+    ],
+  };
+
+  function formatDate(date) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0"); // 月份从0开始，需要+1并且补0
+    const day = String(date.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  }
+
+  function getLast15Days() {
+    const today = new Date();
+    const dates = [];
+    const dateObj = {};
+    for (let i = 0; i < 15; i++) {
+      const date = new Date(today);
+      date.setDate(today.getDate() - i);
+      let temp = formatDate(date);
+      dates.unshift(temp);
+      dateObj[temp] = 0;
+    }
+    return { dates, dateObj };
+  }
+
+  const getData = () => {
     Request.get("/api/img/statistics").then((res: any) => {
       if (res.success) {
         const {
           data: { all, author, counts, illust, r12, r18 },
         } = res || {};
-        myChart?.setOption?.({
+        myPie?.setOption({
           series: [
             {
               data: [
@@ -69,28 +124,69 @@ export default function Statistics({ text }) {
             },
           ],
         });
-        console.log("options>>>", option);
+        let _dates = datesObj;
+        counts?.length &&
+          counts.map((v: any) => {
+            _dates[v.days] = v.numbers;
+          });
+        console.log(_dates, "dates");
+        myLine?.setOption({
+          series: [
+            {
+              data: Object.values(_dates),
+            },
+          ],
+        });
       }
     });
+  };
+
+  useEffect(() => {
+    PieRef.current && setMyPie(echarts.init(PieRef.current, "dark"));
+    LineRef.current && setMyLine(echarts.init(LineRef.current, "dark"));
+    // if (myPie) {
+    //   myPie.setOption?.(pieOption);
+    // }
+    // if (LineRef) {
+    //   const { dates, dateObj } = getLast15Days();
+    //   console.log(dates, dateObj, "dates");
+    //   datesObj = dateObj;
+    //   lineOption.xAxis.data = dates;
+    //   LineRef.setOption?.(lineOption);
+    // }
+    getData();
   }, []);
 
   useEffect(() => {
-    eChartsRef.current && setMyChart(echarts.init(eChartsRef.current, "dark"));
-  }, []);
+    if (myPie) {
+      myPie.setOption?.(pieOption);
+    }
+  }, [myPie]);
 
   useEffect(() => {
-    option && myChart && myChart?.setOption?.(option);
-  }, [myChart]);
+    if (LineRef) {
+      const { dates, dateObj } = getLast15Days();
+      console.log(dates, dateObj, "dates");
+      datesObj = dateObj;
+      lineOption.xAxis.data = dates;
+      LineRef.setOption?.(lineOption);
+    }
+  }, [LineRef]);
 
   return (
     <div>
       <div
-        id="pie"
-        ref={eChartsRef}
+        ref={PieRef}
         className={styles.pie}
         style={{
-          width: "100%",
-          height: "400px",
+          height: "300px",
+        }}
+      ></div>
+      <div
+        ref={LineRef}
+        className={styles.pie}
+        style={{
+          height: "300px",
         }}
       ></div>
     </div>
