@@ -2,7 +2,7 @@
  * @Author: kasuie
  * @Date: 2023-09-19 09:30:36
  * @LastEditors: kasuie
- * @LastEditTime: 2023-09-20 18:24:35
+ * @LastEditTime: 2023-09-20 21:09:16
  * @Description:
  */
 "use client";
@@ -41,7 +41,7 @@ export default function Statistics() {
         itemStyle: {
           borderRadius: 10,
           borderColor: "#fff",
-          borderWidth: 2,
+          borderWidth: 1,
         },
         label: {
           show: false,
@@ -88,6 +88,13 @@ export default function Statistics() {
         data: [],
         type: "line",
         smooth: true,
+        emphasis: {
+          label: {
+            show: true,
+            fontSize: 16,
+            fontWeight: "bold",
+          },
+        },
       },
     ],
   };
@@ -96,78 +103,35 @@ export default function Statistics() {
     title: {
       text: "画师作品",
     },
+    xAxis: {
+      type: "value",
+    },
+    yAxis: {
+      type: "category",
+      data: ["作品数", "画师数"],
+    },
+
+    colorBy: "data",
     backgroundColor: "transparent",
     series: [
       {
-        type: "gauge",
-        startAngle: 90,
-        endAngle: -270,
-        pointer: {
-          show: false,
-        },
-        progress: {
-          show: true,
-          overlap: false,
-          roundCap: true,
-          clip: false,
-          itemStyle: {
-            borderWidth: 1,
-            borderColor: "#464646",
-          },
-        },
-        axisLine: {
-          lineStyle: {
-            width: 40,
-          },
-        },
-        splitLine: {
-          show: false,
-          distance: 0,
-          length: 10,
-        },
-        axisTick: {
-          show: false,
-        },
-        axisLabel: {
-          show: false,
-          distance: 50,
-        },
-        data: [
-          {
-            value: 0,
-            name: "作品数",
-            title: {
-              offsetCenter: ["0%", "-30%"],
-            },
-            detail: {
-              valueAnimation: true,
-              offsetCenter: ["0%", "-20%"],
-            },
-          },
-          {
-            value: 0,
-            name: "画师数",
-            title: {
-              offsetCenter: ["0%", "0%"],
-            },
-            detail: {
-              valueAnimation: true,
-              offsetCenter: ["0%", "10%"],
-            },
-          },
-        ],
-        title: {
-          fontSize: 14,
-        },
-        detail: {
-          width: 50,
-          height: 14,
-          fontSize: 14,
-          color: "inherit",
-          borderColor: "inherit",
-          borderRadius: 20,
+        data: [0, 0],
+        type: "bar",
+        itemStyle: {
+          borderRadius: 0,
+          borderColor: "#fff",
           borderWidth: 1,
-          formatter: "{value}",
+        },
+        label: {
+          show: true,
+          position: ["50%", "50%"],
+        },
+        emphasis: {
+          label: {
+            show: true,
+            fontSize: 16,
+            fontWeight: "bold",
+          },
         },
       },
     ],
@@ -227,30 +191,7 @@ export default function Statistics() {
         });
         myRing?.setOption({
           series: {
-            data: [
-              {
-                value: illust,
-                name: "作品数",
-                title: {
-                  offsetCenter: ["0%", "-30%"],
-                },
-                detail: {
-                  valueAnimation: true,
-                  offsetCenter: ["0%", "-20%"],
-                },
-              },
-              {
-                value: author,
-                name: "画师数",
-                title: {
-                  offsetCenter: ["0%", "0%"],
-                },
-                detail: {
-                  valueAnimation: true,
-                  offsetCenter: ["0%", "10%"],
-                },
-              },
-            ],
+            data: [illust, author],
           },
         });
       }
