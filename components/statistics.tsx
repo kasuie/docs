@@ -2,7 +2,7 @@
  * @Author: kasuie
  * @Date: 2023-09-19 09:30:36
  * @LastEditors: kasuie
- * @LastEditTime: 2023-09-20 11:40:00
+ * @LastEditTime: 2023-09-20 17:49:17
  * @Description:
  */
 "use client";
@@ -70,6 +70,9 @@ export default function Statistics({ text }) {
   };
 
   const lineOption = {
+    title: {
+      text: "新增量",
+    },
     xAxis: {
       type: "category",
       data: [],
@@ -77,6 +80,7 @@ export default function Statistics({ text }) {
     yAxis: {
       type: "value",
     },
+    backgroundColor: "transparent",
     series: [
       {
         data: [],
@@ -113,6 +117,13 @@ export default function Statistics({ text }) {
         const {
           data: { all, author, counts, illust, r12, r18 },
         } = res || {};
+        let _dates: any = datesObj;
+        counts?.length &&
+          counts.map((v: any) => {
+            _dates[v.days] = v.numbers;
+          });
+        _dates = Object.values(_dates);
+        lineOption.series[0].data = _dates;
         myPie?.setOption({
           series: [
             {
@@ -124,16 +135,10 @@ export default function Statistics({ text }) {
             },
           ],
         });
-        let _dates = datesObj;
-        counts?.length &&
-          counts.map((v: any) => {
-            _dates[v.days] = v.numbers;
-          });
-        console.log(_dates, "dates");
         myLine?.setOption({
           series: [
             {
-              data: Object.values(_dates),
+              data: _dates,
             },
           ],
         });
@@ -144,37 +149,21 @@ export default function Statistics({ text }) {
   useEffect(() => {
     PieRef.current && setMyPie(echarts.init(PieRef.current, "dark"));
     LineRef.current && setMyLine(echarts.init(LineRef.current, "dark"));
-    // if (myPie) {
-    //   myPie.setOption?.(pieOption);
-    // }
-    // if (LineRef) {
-    //   const { dates, dateObj } = getLast15Days();
-    //   console.log(dates, dateObj, "dates");
-    //   datesObj = dateObj;
-    //   lineOption.xAxis.data = dates;
-    //   LineRef.setOption?.(lineOption);
-    // }
-    getData();
   }, []);
 
   useEffect(() => {
-    if (myPie) {
+    if (myPie && myLine) {
       myPie.setOption?.(pieOption);
-    }
-  }, [myPie]);
-
-  useEffect(() => {
-    if (LineRef) {
       const { dates, dateObj } = getLast15Days();
-      console.log(dates, dateObj, "dates");
       datesObj = dateObj;
       lineOption.xAxis.data = dates;
-      LineRef.setOption?.(lineOption);
+      myLine.setOption?.(lineOption);
+      getData();
     }
-  }, [LineRef]);
+  }, [myPie, myLine]);
 
   return (
-    <div>
+    <div className={styles.main}>
       <div
         ref={PieRef}
         className={styles.pie}
