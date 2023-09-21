@@ -2,7 +2,7 @@
  * @Author: kasuie
  * @Date: 2023-09-04 15:01:26
  * @LastEditors: kasuie
- * @LastEditTime: 2023-09-05 15:15:55
+ * @LastEditTime: 2023-09-21 09:56:41
  * @Description:
  */
 import React from "react";
@@ -17,6 +17,10 @@ const config: DocsThemeConfig = {
     if (asPath !== '/') {
       return {
         titleTemplate: '%s – Docs'
+      }
+    } else {
+      return {
+        titleTemplate: 'API Docs'
       }
     }
   },
