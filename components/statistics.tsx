@@ -2,7 +2,7 @@
  * @Author: kasuie
  * @Date: 2023-09-19 09:30:36
  * @LastEditors: kasuie
- * @LastEditTime: 2023-09-20 21:09:16
+ * @LastEditTime: 2023-09-22 21:20:15
  * @Description:
  */
 "use client";
@@ -169,7 +169,7 @@ export default function Statistics() {
           counts.map((v: any) => {
             _dates[v.days] = v.numbers;
           });
-        _dates = Object.values(_dates);
+        _dates = Object.values(_dates).reverse();
         lineOption.series[0].data = _dates;
         myPie?.setOption({
           series: [
