@@ -2,7 +2,7 @@
  * @Author: kasuie
  * @Date: 2023-09-04 15:01:26
  * @LastEditors: kasuie
- * @LastEditTime: 2023-09-21 09:56:41
+ * @LastEditTime: 2023-10-16 12:47:11
  * @Description:
  */
 import React from "react";
@@ -20,7 +20,7 @@ const config: DocsThemeConfig = {
       }
     } else {
       return {
-        titleTemplate: 'API Docs'
+        title: 'API Docs'
       }
     }
   },
