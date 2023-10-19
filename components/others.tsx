@@ -2,7 +2,7 @@
  * @Author: kasuie
  * @Date: 2023-10-17 16:03:11
  * @LastEditors: kasuie
- * @LastEditTime: 2023-10-17 18:25:56
+ * @LastEditTime: 2023-10-19 16:27:40
  * @Description:
  */
 "use client";
@@ -14,9 +14,15 @@ export default function OthersData() {
   const PieRef: any = createRef();
   const LineRef: any = createRef();
   const RingRef: any = createRef();
+  const OneRef: any = createRef();
+  const TwoRef: any = createRef();
+  const ThreeRef: any = createRef();
   const [myPie, setMyPie] = useState();
   const [myLine, setMyLine] = useState();
   const [myRing, setMyRing] = useState();
+  const [onePie, setOnePie] = useState();
+  const [twoPie, setTwoPie] = useState();
+  const [threePie, setThreePie] = useState();
   let datesObj = {};
 
   const pieOption = {
@@ -92,6 +98,144 @@ export default function OthersData() {
     ],
   };
 
+  const oneOption = {
+    // width: 300,
+    // height: 300,
+    tooltip: {
+      trigger: "item",
+    },
+    legend: {
+      top: "5%",
+      left: "center",
+    },
+    series: [
+      {
+        name: "Access From",
+        type: "pie",
+        radius: ["40%", "70%"],
+        avoidLabelOverlap: false,
+        itemStyle: {
+          borderRadius: 10,
+          borderColor: "#fff",
+          borderWidth: 2,
+        },
+        label: {
+          show: false,
+          position: "center",
+        },
+        emphasis: {
+          label: {
+            show: true,
+            fontSize: 40,
+            fontWeight: "bold",
+          },
+        },
+        labelLine: {
+          show: false,
+        },        
+        data: [
+          { value: 98, name: "一级护理" },
+          { value: 99, name: "病区环境管理" },
+          { value: 98, name: "导管护理" },
+          { value: 98, name: "护理文件书写" },
+          { value: 97, name: "优质护理服务" },
+        ],
+      },
+    ],
+  };
+
+  const twoOption = {
+    // width: 300,
+    // height: 300,
+    tooltip: {
+      trigger: "item",
+    },
+    legend: {
+      top: "5%",
+      left: "center",
+    },
+    series: [
+      {
+        name: "Access From",
+        type: "pie",
+        radius: ["40%", "70%"],
+        avoidLabelOverlap: false,
+        itemStyle: {
+          borderRadius: 10,
+          borderColor: "#fff",
+          borderWidth: 2,
+        },
+        label: {
+          show: false,
+          position: "center",
+        },
+        emphasis: {
+          label: {
+            show: true,
+            fontSize: 40,
+            fontWeight: "bold",
+          },
+        },
+        labelLine: {
+          show: false,
+        },
+        data: [
+          { value: 98, name: "一级护理" },
+          { value: 98, name: "病区环境管理" },
+          { value: 97, name: "安全用药管理" },
+          { value: 99, name: "抢救车管理" },
+          { value: 97, name: "护理文件书写" },
+        ],
+      },
+    ],
+  };
+
+  const threeOption = {
+    // width: 300,
+    // height: 300,
+    tooltip: {
+      trigger: "item",
+    },
+    legend: {
+      top: "5%",
+      left: "center",
+    },
+    series: [
+      {
+        name: "Access From",
+        type: "pie",
+        radius: ["40%", "70%"],
+        avoidLabelOverlap: false,
+        itemStyle: {
+          borderRadius: 10,
+          borderColor: "#fff",
+          borderWidth: 2,
+        },
+        label: {
+          show: false,
+          position: "center",
+        },
+        emphasis: {
+          label: {
+            show: true,
+            fontSize: 40,
+            fontWeight: "bold",
+          },
+        },
+        labelLine: {
+          show: false,
+        },
+        data: [
+          { value: 98, name: "护理文件书写" },
+          { value: 98, name: "一级护理" },
+          { value: 98, name: "二，三级护理" },
+          { value: 99, name: "住院患者??管理" },
+          { value: 99, name: "跌倒坠床管理" },
+        ],
+      },
+    ],
+  };
+
   const lineOption = {
     title: {
       text: "Stacked Line",
@@ -116,7 +260,15 @@ export default function OthersData() {
     xAxis: {
       type: "category",
       boundaryGap: false,
-      data: ["护理文件书写", "一级护理", "二级护理", "二，三级护理", "住院患者", "跌倒坠床管理", "Sun"],
+      data: [
+        "护理文件书写",
+        "一级护理",
+        "二级护理",
+        "二，三级护理",
+        "住院患者",
+        "跌倒坠床管理",
+        "Sun",
+      ],
     },
     yAxis: {
       type: "value",
@@ -227,29 +379,52 @@ export default function OthersData() {
   useEffect(() => {
     PieRef.current && setMyPie(echarts.init(PieRef.current, "dark"));
     LineRef.current && setMyLine(echarts.init(LineRef.current, "dark"));
-    RingRef.current && setMyRing(echarts.init(RingRef.current, "dark"));
+    OneRef.current && setOnePie(echarts.init(OneRef.current, "dark"));
+    TwoRef.current && setTwoPie(echarts.init(TwoRef.current, "dark"));
+    ThreeRef.current && setThreePie(echarts.init(ThreeRef.current, "dark"));
   }, []);
 
   useEffect(() => {
-    if (myPie && myLine && myRing) {
+    if (myPie && myLine && onePie && twoPie && threePie) {
       myPie.setOption?.(pieOption);
+      onePie.setOption?.(oneOption);
+      twoPie.setOption?.(twoOption);
+      threePie.setOption?.(threeOption);
       const { dates, dateObj } = getLast15Days();
       datesObj = dateObj;
       lineOption.xAxis.data = dates;
       myLine.setOption?.(lineOption);
-      myRing.setOption?.(ringOption);
     }
-  }, [myPie, myLine, myRing]);
+  }, [myPie, myLine, onePie, twoPie, threePie]);
 
   return (
     <div className={styles.main}>
-      <div
-        ref={RingRef}
-        className={styles.ring}
-        style={{
-          height: "300px",
-        }}
-      ></div>
+      <div className={styles.pies}>
+        <div
+          ref={OneRef}
+          className={styles.pie}
+          style={{
+            height: "300px",
+            width: "30%"
+          }}
+        ></div>
+        <div
+          ref={TwoRef}
+          className={styles.pie}
+          style={{
+            height: "300px",
+            width: "30%"
+          }}
+        ></div>
+        <div
+          ref={ThreeRef}
+          className={styles.pie}
+          style={{
+            height: "300px",
+            width: "30%"
+          }}
+        ></div>
+      </div>
       <div
         ref={PieRef}
         className={styles.pie}

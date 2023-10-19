@@ -10,11 +10,8 @@ import styles from "./index.module.css";
 
 export default function Others() {
   return (
-    <div className={styles['d-others']}>
-      <div>
-        <div>Kasuie の API Docs</div>
-        <OthersData></OthersData>
-      </div>
+    <div className={styles["d-others"]}>
+      <OthersData></OthersData>
     </div>
   );
 }
