@@ -1,5 +1,34 @@
 import Icons from "../../components/Icons";
 
-# 图标
+## 预览:
 
 <Icons />
+
+## 安装
+
+```js copy
+    npm i @kasuie/icon
+```
+
+## 使用
+
+```js copy
+import { HeartIcon } from "@kasuie/icon";
+
+    ...
+
+<HeartIcon size={24} />
+
+```
+
+## 参数
+
+| 参数名      | 参数类型             | 默认值 | 说明               |
+| :---------- | :------------------- | :----- | :----------------- |
+| `width`     | `number` or `string` | `16`   | 宽                 |
+| `height`    | `number` or `string` | `16`   | 高                 |
+| `size`      | `number` or `string` | `16`   | 尺寸，同时指定宽高 |
+| `color`     | `string`             |        | 颜色               |
+| `className` | `string`             |        | 类名               |
+
+另外也支持原生的 svg 属性
