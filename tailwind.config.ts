@@ -2,11 +2,11 @@
  * @Author: kasuie
  * @Date: 2024-05-21 19:39:43
  * @LastEditors: kasuie
- * @LastEditTime: 2024-05-21 19:39:47
+ * @LastEditTime: 2024-05-22 11:20:31
  * @Description:
  */
-/** @type {import('tailwindcss').Config} */
-module.exports = {
+import type { Config } from 'tailwindcss';
+const config: Config = {
   content: [
     "./pages/**/*.{js,jsx,ts,tsx,md,mdx}",
     "./components/**/*.{js,jsx,ts,tsx,md,mdx}",
@@ -16,3 +16,5 @@ module.exports = {
   },
   plugins: [],
 };
+
+export default config;
