@@ -18,8 +18,8 @@
   },
   "homepage": "https://github.com/shuding/nextra-docs-template#readme",
   "dependencies": {
-    "@kasuie/icon": "^0.0.6",
-    "@kasuie/utils": "^0.0.4",
+    "@kasuie/icon": "^0.0.7",
+    "@kasuie/utils": "^0.0.8",
     "@types/qs": "^6.9.8",
     "echarts": "^5.4.3",
     "next": "^13.0.6",
