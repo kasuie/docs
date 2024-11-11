@@ -2,12 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "HYTMR";
+  font-display: swap;
+  src: url("https://npm.elemecdn.com/fontcdn-ariasaka@1.0.0/HYTangMeiRen55W.woff2")
+    format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
 html,
 body {
   margin: 0;
   padding: 0;
   height: 100%;
   width: 100%;
+  font-family: "HYTMR", "sans-serif";
 }
 
 html::-webkit-scrollbar {
