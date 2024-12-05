@@ -2,7 +2,7 @@
  * @Author: kasuie
  * @Date: 2023-09-04 15:01:26
  * @LastEditors: kasuie
- * @LastEditTime: 2024-11-11 15:48:11
+ * @LastEditTime: 2024-12-05 20:45:15
  * @Description:
  */
 import { NextConfig } from "next";
@@ -17,7 +17,7 @@ const nextConfig: NextConfig = {
     return [
       {
         source: "/api/:path*",
-        destination: "http://kasuie.cc:8001/:path*",
+        destination: "https://kasuie.cc/apis/:path*",
         // destination: "http://localhost:3001/api/:path*",
       },
     ];
