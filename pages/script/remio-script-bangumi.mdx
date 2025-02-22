@@ -1,0 +1,143 @@
+# remio-script-bangumi
+
+## 推送条目接口
+
+```js
+POST `${BASE_URL}/bgm/saveSub`
+```
+
+| 参数名         | 类型   | 默认值 | 说明                                                                                     |
+| :------------- | :--------- | :----- | :--------------------------------------------------------------------------------------- |
+| `platform`     | `string`   |        | 放送平台，表示该作品发布的平台，TV, Web, 欧美剧, DLC等                                                   |
+| `summary`      | `string`   |        | 简短的剧情简介，描述作品的主要内容                                                       |
+| `name`         | `string`   |        | 作品的名称                                                          |
+| `eps`          | `int`      |        | 剧集数量，对于书籍条目为话数                                                             |
+| `meta_tags`    | `string[]` |        | 作品的元标签，帮助描述作品类型，例：`["悬疑", "TV", "日本", "推理", "漫画改"]`          |
+| `volumes`      | `int`      |        | 卷数                                                                 |
+| `series`       | `boolean`  |        | 是否为系列作品                                          |
+| `locked`       | `boolean`  |        | 是否为锁定状态                                              |
+| `nsfw`         | `boolean`  |        | 是否为成人内容，`false` 表示不是成人内容                                                 |
+| `type`         | `int`      |        | 作品类型，1 书籍; 2为动画; 3为音乐; 4为游戏; 6为三次元                                               |
+| `bgmId`        | `int`      |        | bangumi上的ID                                                                |
+| `nameCn`       | `string`   |        | 中文名称                                                              |
+| `tags`         | `string`   |        | 标签，多个标签用逗号分隔                   |
+| `bgmScore`     | `float`    |        | bangumi上的评分                                                                  |
+| `bgmRaters`    | `int`      |        | bangumi上的评分人数                                                            |
+| `info`         | `string`   |        | 相关信息，包括官方地址、原作者、导演等，为对象`stringify`格式化的字符串 |
+| `infoBox`      | `string`   |        | 作品的额外信息，为[InfoBoxItem](/script/remio-script-bangumi#infoboxitem-参数详细说明)[]数组`stringify`格式化的字符串        |
+| `startDate`    | `date`     |        | 作品开始日期                              |
+| `broadcast`    | `string`   |        | 放送的一些信息，为对象`stringify`格式化的字符串 |
+| `bgmImages`    | `string`   |        | bangumi上的封面图，为[BgmImage](/script/remio-script-bangumi#bgmimage-参数详细说明)[]数组`stringify`格式化的字符串 |
+| `totalEpisodes`| `int`      |        | 总集数                                                                   |
+| `characters`   | [SubCharacter](/script/remio-script-bangumi#subcharacter-参数详细说明)[] |        | 作品角色信息数组，每个角色包含姓名、角色关系、配音演员等信息                            |
+| `persons`      | [SubPerson](/script/remio-script-bangumi#subperson-参数详细说明)[]    |        | 参与人员信息数组，包含每个参与者的姓名、职位等信息                                      |
+| `relPersons`   | `string`   |        | 相关人员的详细信息，为[RelPerson](/script/remio-script-bangumi#relperson-参数详细说明)[]数组`stringify`格式化的字符串              |
+| `rank`         | `int`      |        | 作品的排名，为手动输入的                                                                   |
+
+### `SubCharacter` 参数详细说明：
+
+| 参数名        | 类型  | 默认值 | 说明                                                                                     |
+| :------------ | :-------- | :----- | :--------------------------------------------------------------------------------------- |
+| `name`        | `string`  |        | 角色名称                                                             |
+| `relation`    | `string`  |        | 角色关系，描述该角色在作品中的关系，如主角、配角等                         |
+| `type`        | `int`     |        | 角色类型，人物角色：1，机体：2，舰船：3，组织：4                   |
+| `id`          | `int`     |        | 角色在bangumi上的ID                                                                         |
+| `locked`      | `boolean` |        | 是否锁定                                  |
+| `isCv`        | `boolean` |        | 是否是配音演员                             |
+| `actors`      | `string`  |        | 配音演员信息，为[`Actor`](/script/remio-script-bangumi#actor-参数详细说明)[]数组`stringify`格式化的字符串                                           |
+| `bgmImages`   | `string`  |        | 该角色的图片信息，为[BgmImage](/script/remio-script-bangumi#bgmimage-参数详细说明)[]数组`stringify`格式化的字符串                                                    |
+
+### `SubPerson` 参数详细说明：
+
+| 参数名        | 类型  | 默认值 | 说明                                                                                     |
+| :------------ | :-------- | :----- | :--------------------------------------------------------------------------------------- |
+| `name`        | `string`  |        | 人员的姓名                                                          |
+| `type`        | `int`     |        | 人员的类型，个人：1, 公司：2, 组合：3            |
+| `id`          | `int`     |        | 人员在bangumi上的ID                                                                      |
+| `locked`      | `boolean` |        | 是否锁定                                  |
+| `isCv`        | `boolean` |        | 是否为配音演员                     |
+| `summary`     | `string`  |        | 人员的简短介绍或描述                                                               |
+| `bgmImages`   | `string`  |        | 该人员的图片信息，为[BgmImage](/script/remio-script-bangumi#bgmimage-参数详细说明)[]数组`stringify`格式化的字符串                                                |
+| `career`      | `string`  |        | 人员的职业信息，多个标签用逗号分隔，示例：`producer` 表示制片人                                         |
+
+### `BgmImage` 参数详细说明：
+
+> 图片信息，包括不同尺寸的图像，不包含域名前缀，自行拼接前缀：`https://lain.bgm.tv`
+
+| 参数名    | 类型  | 默认值 | 说明                                           |
+| :-------- | :-------- | :----- | :--------------------------------------------- |
+| `small`   | `string`  |        | 小尺寸图像的 URL                               |
+| `grid`    | `string`  |        | 网格尺寸图像的 URL，通常是方形的图像            |
+| `large`   | `string`  |        | 大尺寸图像的 URL                               |
+| `medium`  | `string`  |        | 中等尺寸图像的 URL                             |
+| `common`  | `string`  |        | 常规尺寸图像的 URL，通常是适用于多种场景的尺寸 |
+| `avatar`  | `string`  |        | 头像尺寸图像的 URL                             |
+
+### `Actor` 参数详细说明：
+
+| 参数名        | 类型  | 默认值 | 说明                                                                                     |
+| :------------ | :-------- | :----- | :--------------------------------------------------------------------------------------- |
+| `name`        | `string`  |        | 配音演员的姓名                                                       |
+| `id`          | `int`     |        | 配音演员在bangumi上的ID                                                                   |
+
+### `RelPerson` 参数详细说明：
+
+| 参数名     | 类型  | 默认值 | 说明                                             |
+| :--------- | :-------- | :----- | :----------------------------------------------- |
+| `id`       | `int`     |        | 人员的唯一标识符                                 |
+| `name`     | `string`  |        | 人员的姓名                                       |
+| `position` | `string`  |        | 人员的职位，例如导演、编剧、摄影监督等          |
+
+### `InfoBoxItem` 参数详细说明：
+
+| 参数名     | 类型  | 默认值 | 说明                                             |
+| :--------- | :-------- | :----- | :----------------------------------------------- |
+| `key`       | `string`  |        | 标识字段名                                 |
+| `value`     | `string`  |        | 标识字段值                                       |
+
+
+## 推送角色接口
+
+```js
+POST `${BASE_URL}/bgm/saveChar`
+```
+
+| 参数名       | 类型    | 默认值 | 说明                                                   |
+| :----------- | :------ | :----- | :----------------------------------------------------- |
+| `summary`    | `string` |        | 角色的简介描述                        |
+| `name`       | `string` |        | 角色的名称                          |
+| `id`         | `number` |        | 角色在bangumi上的ID                                          |
+| `locked`     | `boolean`|        | 是否锁定该角色  |
+| `type`       | `number` |        | 角色类型，人物角色：1，机体：2，舰船：3，组织：4                            |
+| `nsfw`       | `boolean`|        | 是否含有不适宜儿童观看的内容，`false`表示无，`true`表示有   |
+| `info`       | `string` |        | 角色的附加信息，JSON格式，包含血型、身高、体重等      |
+| `nameCn`     | `string` |        | 角色的中文名称                            |
+| `gender`     | `string` |        | 角色的性别，`male`为男性，`female`为女性                 |
+| `birthDay`   | `string` |        | 角色的生日                          |
+| `birthDesc`  | `string` |        | 角色的生日描述                         |
+| `bloodType`  | `string` | `null` | 角色的血型，若无则为`null`                              |
+| `aliasName`  | `Array`  |        | 角色的别名，数组格式，包含不同语言和形式的别名            |
+| `bgmImages`  | `string` |        | 角色的背景图片信息，为[BgmImage](/script/remio-script-bangumi#bgmimage-参数详细说明)[]数组`stringify`格式化的字符串      |
+| `actors`     | `Array`  |        | 角色的配音演员信息，为[`Actor`](/script/remio-script-bangumi#actor-参数详细说明)[]数组`stringify`格式化的字符串                |
+| `cv`         | [CV](/script/remio-script-bangumi#cv-参数详细说明) |        | 配音演员的详细信息            |
+| `rank`       | `number` |        | 角色的排名，为手动输入                                               |
+
+### `CV` 参数详细说明：
+
+| 参数名       | 类型    | 默认值 | 说明                                                   |
+| :----------- | :------ | :----- | :----------------------------------------------------- |
+| `aliasName`  | `Array` |        | 配音演员的别名，数组格式，包含不同语言和形式的别名        |
+| `bgmImages`  | `string` |        | 配音演员的背景图片信息，为[BgmImage](/script/remio-script-bangumi#bgmimage-参数详细说明)[]数组`stringify`格式化的字符串 |
+| `birthDay`   | `string` |        | 配音演员的生日                        |
+| `career`     | `string` |        | 配音演员的职业经历的身份，多个以逗号分隔               |
+| `gender`     | `string` |        | 配音演员的性别，`male`为男性，`female`为女性                             |
+| `id`         | `number` |        | 配音演员在bangumi上的ID                                       |
+| `info`       | `string` |        | 配音演员的附加信息，对象的JSON格式，包含血型、身高、出生地等   |
+| `isCv`       | `boolean`|        | 是否为声优                 |
+| `locked`     | `boolean`|        | 是否锁定该配音演员的信息 |
+| `name`       | `string` |        | 配音演员的名称                     |
+| `nameCn`     | `string` |        | 配音演员的中文名称                         |
+| `summary`    | `string` |        | 配音演员的简介      |
+| `twiAccount` | `string` | `undefined` | 配音演员的推特账号              |
+| `type`       | `number` |        | 配音演员的类型，个人：1, 公司：2, 组合：3                        |
+

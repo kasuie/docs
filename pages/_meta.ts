@@ -2,11 +2,12 @@
  * @Author: kasuie
  * @Date: 2024-09-06 16:01:20
  * @LastEditors: kasuie
- * @LastEditTime: 2024-11-11 15:55:35
+ * @LastEditTime: 2025-02-22 10:20:20
  * @Description:
  */
 export default {
   mio: "Mio 随机图片API :)",
+  script: "Remio 脚本合集 :)",
   icon: "Icon 图标库 :)",
   contact: {
     title: "联系我",
