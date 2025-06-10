@@ -6,9 +6,6 @@
  * @Description: 
  */
 import qs from "qs";
-
-// const baseURL = "http://kasuie.cc:8001";
-
 class API {
   static async request(url: RequestInfo | URL, options = {}) {
     try {
